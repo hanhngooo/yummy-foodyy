@@ -35,7 +35,7 @@ export default {
 }
 .card-img,
 .card-img-top {
-  filter: brightness(110%);
+  filter: brightness(115%);
 }
 
 a {

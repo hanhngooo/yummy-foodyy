@@ -1,8 +1,18 @@
 <template>
   <div id="app">
-    <div id="nav"><router-link to="/">Home</router-link> |</div>
+    <Navigation />
     <router-view :key="$route.path" />
   </div>
 </template>
+
+<script lang="ts">
+import Navigation from '@/components/Navigation.vue'
+export default {
+  name: 'App',
+  components: {
+    Navigation
+  }
+}
+</script>
 
 <style></style>

@@ -2,3 +2,15 @@
 body {
   font-family: 'Open Sans' !important;
 }
+button {
+  border: none;
+  background-color: transparent;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  outline: none !important;
+}
+button:hover {
+  background-color: #ddbc98;
+  border-radius: 0.2rem;
+  outline: none !important;
+}
