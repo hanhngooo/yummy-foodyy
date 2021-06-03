@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="container align-center ">
+    <div v-if="fetchedRecipes.length" class="container align-center ">
       <div class="row">
         <div
           class="col-sm-6 col-md-4 text-center mb-4"
@@ -34,7 +34,7 @@ export default Vue.extend({
     async getData(): Promise<void> {
       try {
         const response = await axios.get(
-          `${apiUrl}/random?apiKey=${process.env.VUE_APP_API_KEY}&number=10`
+          `${apiUrl}/random?apiKey=${process.env.VUE_APP_API_KEY}&number=12`
         )
         this.fetchedRecipes = response.data.recipes
       } catch (error) {

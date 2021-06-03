@@ -1,6 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@200;300;400&display=swap');
 body {
-  font-family: 'Open Sans' !important;
+  font-family: 'Spectral', serif !important;
+}
+.header-wrapper {
+  background-color: rgb(255, 240, 223);
+  max-height: 30rem;
 }
 button {
   border: none;

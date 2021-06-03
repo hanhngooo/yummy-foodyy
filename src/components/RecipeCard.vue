@@ -24,6 +24,7 @@ export default {
 .card {
   cursor: pointer;
   transition: all 0.5s ease;
+  max-width: 400px;
 }
 .card:hover {
   transform: scale(1.05);

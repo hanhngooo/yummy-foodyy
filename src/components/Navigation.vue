@@ -49,12 +49,7 @@
                 <li
                   v-for="cat in cats"
                   :key="cat.value"
-                  @click="
-                    $router.push({
-                      name: 'category',
-                      params: { value: cat.value }
-                    })
-                  "
+                  @click="$router.push({ path: `/categories/${cat.value}` })"
                   class="categories-item"
                 >
                   {{ cat.name }}
@@ -81,8 +76,8 @@ export default Vue.extend({
           name: 'Asian'
         },
         {
-          value: 'western',
-          name: 'Western'
+          value: 'pasta',
+          name: 'Pasta'
         },
         {
           value: 'dinner',
