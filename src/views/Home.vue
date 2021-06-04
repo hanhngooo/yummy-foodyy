@@ -12,7 +12,6 @@
           id="sorting"
           class="sorting-list "
         >
-          <option class="sorting-option ">Select</option>
           <option value="title" class="sorting-option">Title</option>
           <option value="readyInMinutes" class="sorting-option"
             >Cooking Time</option

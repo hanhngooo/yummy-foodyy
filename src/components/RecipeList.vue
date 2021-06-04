@@ -31,8 +31,19 @@ export default Vue.extend({
     // Sort Recipe by user input
     sortRecipes(): Recipe[] {
       const recipes = [...this.recipes]
-      recipes.sort((a, b) => (a[this.orderTerm] > b[this.orderTerm] ? 1 : -1))
-      return recipes
+      switch (this.orderTerm) {
+        case 'title':
+          return recipes.sort((a, b) =>
+            a[this.orderTerm] > b[this.orderTerm] ? 1 : -1
+          )
+        case 'readyInMinutes':
+          return recipes.sort((a, b) =>
+            a[this.orderTerm] > b[this.orderTerm] ? 1 : -1
+          )
+        default: {
+          return recipes
+        }
+      }
     }
   }
 })
