@@ -9,15 +9,24 @@
       <hr />
     </div>
     <div v-if="fetchedRecipes.length" class="container align-center ">
-      <div class="row">
-        <div
-          class="col-sm-6 col-md-4 text-center mb-4"
-          v-for="recipe in fetchedRecipes"
-          :key="recipe.id"
+      <div
+        class="sorting-group d-flex justify-content-end align-items-center my-3 "
+      >
+        <label class="sorting-label mr-2 mb-0">Sort by </label>
+        <select
+          :model="orderTerm"
+          @change="event => selectSort(event.target.value)"
+          name="sorting"
+          id="sorting"
+          class="sorting-list "
         >
-          <RecipeCard :recipe="recipe" />
-        </div>
+          <option value="title" class="sorting-option">Title</option>
+          <option value="readyInMinutes" class="sorting-option"
+            >Cooking Time</option
+          >
+        </select>
       </div>
+      <RecipeList :recipes="fetchedRecipes" :orderTerm="orderTerm" />
     </div>
   </div>
 </template>
@@ -26,17 +35,19 @@
 import Vue from 'vue'
 import axios from 'axios'
 import { apiUrl } from '@/utility/constant'
-import RecipeCard from '@/components/RecipeCard.vue'
+import RecipeList from '@/components/RecipeList.vue'
+import { OrderTerm } from '@/utility/types'
 
 export default Vue.extend({
   name: 'Category',
   components: {
-    RecipeCard
+    RecipeList
   },
   data() {
     return {
       category: '',
-      fetchedRecipes: []
+      fetchedRecipes: [],
+      orderTerm: 'title' as OrderTerm
     }
   },
   methods: {
@@ -49,6 +60,9 @@ export default Vue.extend({
       } catch (error) {
         console.log(error)
       }
+    },
+    selectSort(term: OrderTerm) {
+      this.orderTerm = term
     }
   },
   mounted() {
