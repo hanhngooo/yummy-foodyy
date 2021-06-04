@@ -8,6 +8,9 @@
       class="border-none"
       border-variant="light"
     >
+      <b-card-text>
+        Cooking time: {{ recipe.readyInMinutes }} minutes
+      </b-card-text>
     </b-card>
   </router-link>
 </template>
@@ -25,10 +28,14 @@ export default {
   cursor: pointer;
   transition: all 0.5s ease;
   max-width: 400px;
+  margin-top: 0.5rem;
 }
 .card:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 11px rgba(33, 33, 33, 0.05);
+  box-shadow: 0 2px 11px rgba(0, 0, 0, 0.05);
+}
+.card-body {
+  padding: 1rem;
 }
 .card-title {
   font-size: 18px;
