@@ -1,7 +1,12 @@
 <template>
   <div class="category text-center">
-    <div class="header-wrapper w-100 bg-img ">
-      <h1 class="category-header py-5 ">Best of {{ category }}</h1>
+    <div
+      class="header-wrapper w-100 mb-5 d-flex flex-column justify-content-center align-items-center"
+    >
+      <h1 class="category-header ">
+        <i>Best of {{ category }}</i>
+      </h1>
+      <hr />
     </div>
     <div v-if="fetchedRecipes.length" class="container align-center ">
       <div class="row">
@@ -30,8 +35,8 @@ export default Vue.extend({
   },
   data() {
     return {
-      fetchedRecipes: [],
-      category: ''
+      category: '',
+      fetchedRecipes: []
     }
   },
   methods: {
@@ -47,8 +52,8 @@ export default Vue.extend({
     }
   },
   mounted() {
-    this.getData()
     this.category = this.$route.params.cat
+    this.getData()
   }
 })
 </script>
@@ -56,10 +61,41 @@ export default Vue.extend({
 <style scoped>
 .header-wrapper {
   height: 32rem;
-
   background-image: url('../assets/header1.jpg');
-  background-position: center center;
+  background-attachment: fixed;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+.category-header {
+  font-size: 4rem;
+  color: #ffff;
+}
+
+hr {
+  width: 14rem;
+  border-top: 1px solid #ffff;
+}
+@media only screen and (max-width: 768px) {
+  .header-wrapper {
+    height: 24rem;
+  }
+  .category-header {
+    font-size: 3.5rem;
+  }
+  hr {
+    width: 12rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .header-wrapper {
+    height: 20rem;
+  }
+  .category-header {
+    font-size: 2.5rem;
+  }
+  hr {
+    width: 10rem;
+  }
 }
 </style>

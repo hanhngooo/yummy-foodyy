@@ -5,10 +5,10 @@
       type="light"
       @scroll="handleScroll"
       :fixed="isTop ? 'top' : ''"
-      class="py-0"
+      :class="navfixed"
     >
       <b-navbar-brand href="#">
-        <img src="@/assets/yummy.png" alt="logo" width="70" /> Yummy Foody
+        <img src="@/assets/yummy.png" alt="logo" width="50" /> Yummy Foody
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -93,23 +93,32 @@ export default Vue.extend({
         }
       ],
       isCatsOpen: false,
-      isTop: false
+      isTop: false,
+      scrollPosition: 0,
+      navfixed: ''
     }
   },
-  methods: {
-    handleSCroll() {
-      if (window.scrollY > 2 && this.isTop === false) {
-        this.isTop = true
-      } else if (window.scrollY < 2) {
-        this.isTop = false
-      }
-    }
-  },
-  created() {
-    window.addEventListener('scroll', this.handleSCroll)
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll)
   },
   destroyed() {
-    window.removeEventListener('scroll', this.handleSCroll)
+    window.removeEventListener('scroll', this.handleScroll)
+  },
+  computed: {},
+  methods: {
+    handleScroll() {
+      this.scrollPosition = window.scrollY
+      if (this.scrollPosition > 5 && this.isTop === false) {
+        this.isTop = true
+        this.navfixed = 'nav-fixed'
+        if (this.scrollPosition > 5) {
+          this.navfixed = 'nav-fixed visible'
+        }
+      } else if (this.scrollPosition < 5) {
+        this.isTop = false
+        this.navfixed = ''
+      }
+    }
   }
 })
 </script>
@@ -117,15 +126,22 @@ export default Vue.extend({
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap');
 .navbar {
-  background-color: #fffaf5;
-  opacity: 0.8;
+  background-color: #faf2ea;
 }
+.nav-fixed {
+  background-color: #fdeddd;
+
+  opacity: 0.9;
+  transition: all 1s;
+}
+
 .navbar-brand {
   font-family: 'Dancing Script', cursive;
   font-weight: 700;
-  font-size: 2rem !important;
+  font-size: 1.5rem !important;
   color: #7a4545 !important;
 }
+
 .categories-button {
   position: relative;
 }
@@ -153,9 +169,9 @@ export default Vue.extend({
   padding: 0.4rem 0;
   background-color: #ddbc98;
   border-bottom: 1px solid #e2cbb4;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 .categories-item:hover {
-  background-color: #e2cbb4;
+  background-color: #fdeddd;
 }
 </style>

@@ -1,6 +1,26 @@
 <template>
   <div class="home">
     <div v-if="fetchedRecipes.length" class="container align-center ">
+      <div
+        class="sorting-group d-flex justify-content-end align-items-center my-3 "
+      >
+        <label class="sorting-label mr-2 mb-0">Sort by </label>
+        <select
+          :model="orderTerm"
+          @change="event => selectSort(event.target.value)"
+          name="sorting"
+          id="dorting"
+          class="sorting-list "
+        >
+          <option class="sorting-option ">Select</option>
+          <option value="title" class="sorting-option">Title</option>
+          <option value="cookingTime" class="sorting-option"
+            >Cooking Time</option
+          >
+        </select>
+      </div>
+
+      <!-- <button @click="selectSort('title')">Order by title</button> -->
       <div class="row">
         <div
           class="col-sm-6 col-md-4 text-center mb-4"
@@ -19,6 +39,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import { apiUrl } from '@/utility/constant'
 import RecipeCard from '@/components/RecipeCard.vue'
+import OrderTerm from '@/utility/types'
 
 export default Vue.extend({
   name: 'Home',
@@ -27,7 +48,9 @@ export default Vue.extend({
   },
   data() {
     return {
-      fetchedRecipes: []
+      fetchedRecipes: [],
+      orderTerm: 'title' as OrderTerm,
+      sortedRecipes: []
     }
   },
   methods: {
@@ -40,8 +63,19 @@ export default Vue.extend({
       } catch (error) {
         console.log(error)
       }
+    },
+    selectSort(term: OrderTerm) {
+      this.orderTerm = term
+      this.sortedRecipes = this.sortRecipes(this.orderTerm)
+    },
+    // Sort Recipe by user input
+    sortRecipes(orderTerm: OrderTerm) {
+      return this.fetchedRecipes.sort((a, b) =>
+        a[orderTerm] > b[orderTerm] ? 1 : -1
+      )
     }
   },
+
   mounted() {
     this.getData()
   }
