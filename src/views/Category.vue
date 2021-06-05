@@ -1,10 +1,13 @@
 <template>
   <div class="category text-center">
     <div
+      :style="{
+        backgroundImage: 'url(' + require(`@/assets/${category}.jpg`) + ')'
+      }"
       class="header-wrapper w-100 mb-5 d-flex flex-column justify-content-center align-items-center"
     >
       <h1 class="category-header ">
-        <i>Best of {{ category }}</i>
+        <i>Best of {{ capCategory }}</i>
       </h1>
       <hr />
     </div>
@@ -46,8 +49,10 @@ export default Vue.extend({
   data() {
     return {
       category: '',
+      capCategory: '',
       fetchedRecipes: [],
-      orderTerm: 'title' as OrderTerm
+      orderTerm: 'title' as OrderTerm,
+      header: { backgroundImage: 'url(`./assets/drink.jpg`)' }
     }
   },
   methods: {
@@ -65,8 +70,11 @@ export default Vue.extend({
       this.orderTerm = term
     }
   },
+
   mounted() {
     this.category = this.$route.params.cat
+    this.capCategory =
+      this.category.charAt(0).toUpperCase() + this.category.slice(1)
     this.getData()
   }
 })
@@ -75,7 +83,6 @@ export default Vue.extend({
 <style scoped>
 .header-wrapper {
   height: 32rem;
-  background-image: url('../assets/header1.jpg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
