@@ -7,7 +7,7 @@
       :fixed="isTop ? 'top' : ''"
       :class="navfixed"
     >
-      <b-navbar-brand href="#">
+      <b-navbar-brand href="#" @click="$router.push('/')">
         <img src="@/assets/yummy.png" alt="logo" width="50" /> Yummy Foody
       </b-navbar-brand>
 
@@ -59,6 +59,11 @@
                   {{ cat.name }}
                 </li>
               </ul>
+            </button></b-nav-item
+          >
+          <b-nav-item
+            ><button @click="$router.push('/today-recipe')">
+              What to cook Today
             </button></b-nav-item
           >
         </b-navbar-nav>
