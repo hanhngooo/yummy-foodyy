@@ -48,6 +48,9 @@ export default {
 
 a {
   color: inherit;
+}
+a:hover {
+  color: #7a4545;
   text-decoration: none !important;
 }
 </style>

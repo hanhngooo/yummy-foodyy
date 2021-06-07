@@ -53,9 +53,7 @@ export default Vue.extend({
   data() {
     return {
       fetchedRecipe: {} as Recipe,
-      showRecipe: false,
-      showMeText: 'Show me',
-      anotherText: 'Another please!'
+      showRecipe: false
     }
   },
   methods: {
@@ -73,10 +71,6 @@ export default Vue.extend({
     // Get another recipe on click
     getAnotherRecipe() {
       this.getData()
-    },
-    // show recipe
-    setShowRecipe() {
-      return (this.showRecipe = true)
     }
   },
   computed: {

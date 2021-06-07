@@ -13,54 +13,61 @@
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <b-collapse id="nav-collapse" is-nav>
+      <b-collapse id="nav-collapse" is-nav v-model="isNavCollapsed">
         <b-navbar-nav class="ml-auto">
           <b-nav-item
             ><button @click="$router.push('/')">
               Home
             </button></b-nav-item
           >
-          <b-nav-item>
-            <button
-              class="categories-button "
-              @click="isCatsOpen = !isCatsOpen"
-              @mouseover="isCatsOpen = true"
-              @mouseleave="isCatsOpen = false"
-            >
-              <div>
-                <span
-                  >Categories
-                  <svg
-                    :class="isCatsOpen ? 'categories-arrow-rotate' : ''"
-                    class="categories-arrow"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    ></path></svg
-                ></span>
-              </div>
 
-              <ul v-if="isCatsOpen" class="categories-list">
-                <li
-                  v-for="cat in cats"
-                  :key="cat.value"
-                  @click="
-                    $router.push({
-                      path: `/categories/${cat.value}`
-                    })
-                  "
-                  class="categories-item"
-                >
-                  {{ cat.name }}
-                </li>
-              </ul>
-            </button></b-nav-item
+          <div
+            class="categories-button "
+            @click="onCategoryClick"
+            @mouseleave="isCatsOpen = false"
+            @mouselenter="isCatsOpen = true"
+            :style="collapseStyle"
           >
+            <button>
+              <span
+                >Categories
+                <svg
+                  :class="isCatsOpen ? 'categories-arrow-rotate' : ''"
+                  class="categories-arrow"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  ></path></svg
+              ></span>
+            </button>
+
+            <ul
+              v-if="isCatsOpen"
+              class="categories-list"
+              :style="collapseStyle"
+            >
+              <li
+                v-for="cat in cats"
+                :key="cat.value"
+                @click="
+                  $router.push({
+                    path: `/categories/${cat.value}`
+                  })
+                "
+                class="categories-item px-2"
+              >
+                <b-nav-item>
+                  {{ cat.name }}
+                </b-nav-item>
+              </li>
+            </ul>
+          </div>
+
           <b-nav-item
             ><button @click="$router.push('/today-recipe')">
               What to cook Today
@@ -104,7 +111,9 @@ export default Vue.extend({
       isCatsOpen: false,
       isTop: false,
       scrollPosition: 0,
-      navfixed: ''
+      navfixed: '',
+      categoryCollapse: false,
+      isNavCollapsed: false
     }
   },
   mounted() {
@@ -113,7 +122,14 @@ export default Vue.extend({
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
   },
-  computed: {},
+  computed: {
+    collapseStyle() {
+      if (this.isNavCollapsed) {
+        return { textAlign: 'left' }
+      }
+      return {}
+    }
+  },
   methods: {
     handleScroll() {
       this.scrollPosition = window.scrollY
@@ -127,6 +143,9 @@ export default Vue.extend({
         this.isTop = false
         this.navfixed = ''
       }
+    },
+    onCategoryClick() {
+      this.isCatsOpen = !this.isCatsOpen
     }
   }
 })
@@ -153,6 +172,7 @@ export default Vue.extend({
 
 .categories-button {
   position: relative;
+  padding: 0.5rem 0;
 }
 .categories-arrow {
   display: inline;
@@ -182,5 +202,11 @@ export default Vue.extend({
 }
 .categories-item:hover {
   background-color: #fdeddd;
+}
+@media only screen and (max-width: 992px) {
+  .categories-list {
+    list-style: none;
+    position: initial;
+  }
 }
 </style>
