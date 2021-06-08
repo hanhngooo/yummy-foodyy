@@ -1,4 +1,4 @@
-# :ramen: Yummy Foody :shallow_pan_of_food
+# :ramen: Yummy Foody :shallow_pan_of_food:
 
 Recipe Website for homecook chefs and everyone, supported by public API https://spoonacular.com/food-api/docs
 
