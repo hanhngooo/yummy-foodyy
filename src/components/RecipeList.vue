@@ -3,7 +3,7 @@
     <div class="container align-center ">
       <div class="row">
         <div
-          class=" col-sm-6 col-md-4 text-center mb-4"
+          class=" col-sm-6 col-md-4  mb-4"
           v-for="recipe in sortRecipes"
           :key="recipe.id"
         >

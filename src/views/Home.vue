@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <div v-if="fetchedRecipes.length" class="container align-center ">
+    <SlideShow />
+    <div class="container align-center ">
       <div
-        class="sorting-group d-flex justify-content-end align-items-center my-3 "
+        class="sorting-group  d-flex justify-content-end align-items-center my-3 "
       >
         <label class="sorting-label mr-2 mb-0">Sort by </label>
         <select
@@ -28,12 +29,14 @@ import Vue from 'vue'
 import axios from 'axios'
 import { apiUrl } from '@/utility/constant'
 import RecipeList from '@/components/RecipeList.vue'
+import SlideShow from '@/components/SlideShow.vue'
 import { OrderTerm } from '@/utility/types'
 
 export default Vue.extend({
   name: 'Home',
   components: {
-    RecipeList
+    RecipeList,
+    SlideShow
   },
   data() {
     return {
