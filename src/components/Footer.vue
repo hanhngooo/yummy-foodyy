@@ -18,9 +18,45 @@
             <li class="footer-nav-item " @click="$router.push('/')">
               Home
             </li>
-            <li class="footer-nav-item">
-              Categories
-            </li>
+
+            <div
+              class="footer-nav-item cursor-pointer"
+              @click="onCategoryClick"
+              @mouseleave="isCatsOpen = false"
+              @mouselenter="isCatsOpen = true"
+            >
+              <span
+                >Categories
+                <svg
+                  :class="isCatsOpen ? 'categories-arrow-rotate' : ''"
+                  class="categories-arrow"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  ></path></svg
+              ></span>
+
+              <ul v-if="isCatsOpen" class="categories-list">
+                <li
+                  v-for="cat in cats"
+                  :key="cat.value"
+                  @click="
+                    $router.push({
+                      path: `/categories/${cat.value}`
+                    })
+                  "
+                  class="categories-item px-2"
+                >
+                  {{ cat.name }}
+                </li>
+              </ul>
+            </div>
+
             <li class="footer-nav-item" @click="$router.push('/today-recipe')">
               What to cook Today
             </li>
@@ -85,7 +121,39 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'Footer'
+  name: 'Footer',
+  data() {
+    return {
+      cats: [
+        {
+          value: 'asian',
+          name: 'Asian'
+        },
+        {
+          value: 'pasta',
+          name: 'Pasta'
+        },
+        {
+          value: 'dinner',
+          name: 'Dinner'
+        },
+        {
+          value: 'dessert',
+          name: 'Dessert'
+        },
+        {
+          value: 'drinks',
+          name: 'Drinks'
+        }
+      ],
+      isCatsOpen: false
+    }
+  },
+  methods: {
+    onCategoryClick() {
+      this.isCatsOpen = !this.isCatsOpen
+    }
+  }
 })
 </script>
 
@@ -122,6 +190,7 @@ export default Vue.extend({
     padding-top: 1rem !important;
     margin-top: 0.5rem !important;
   }
+
   .footer-wrapper {
     padding-top: 1rem !important;
   }
@@ -130,6 +199,7 @@ a {
   color: inherit;
   text-decoration: none !important;
 }
+
 .footer-nav-item {
   cursor: pointer;
 }
@@ -138,7 +208,9 @@ a {
 .social-icons-link:hover {
   color: #7a4545 !important;
 }
-
+.btn-secondary {
+  background-color: red !important;
+}
 .contact-paragraph,
 .footer-nav-item,
 .contact-list,

@@ -85,7 +85,6 @@ export default Vue.extend({
   name: 'Navigation',
   data() {
     return {
-      isCatOpen: false,
       cats: [
         {
           value: 'asian',
@@ -195,7 +194,6 @@ export default Vue.extend({
 }
 .categories-item {
   width: 100%;
-  padding: 0.4rem 0;
   background-color: #ddbc98;
   border-bottom: 1px solid #e2cbb4;
   opacity: 0.9;
