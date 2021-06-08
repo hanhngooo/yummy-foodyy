@@ -5,7 +5,7 @@
         class="slide-heading px-5  d-flex flex-column justify-content-center col-md-6"
       >
         <h1 class="slide-title">
-          Welcome to Yummy
+          Welcome to Yummy Foody
         </h1>
         <p class="slide-content">
           Curabitur non magna convallis, tempus nibh eu, vestibulum nulla. Morbi
